@@ -24,6 +24,33 @@ struct ListNode *mergeTwoSortedList(struct ListNode *list1,struct ListNode *list
 		return list2;
 	}
 }
+
+struct ListNode *mergeTwo(struct ListNode *list1,struct ListNode *list2)
+{
+	bool isfirst=false;
+	if(list1==NULL)return list2;
+	if(list2==NULL)return list1;
+	struct ListNode *l1=list1;
+	struct ListNode *l2=list2;
+	while(l1&&l2)
+	{	
+		while(l1->val<=l2->val)
+		{ 
+			l1=l1->next;
+			isfirst=true;
+		}
+		l1->next=l2;
+		while(l2->val<=l1->val)
+		  l2=l2->next;
+		l2->next=l1;
+	}
+	if(isfirst)
+	  return list1;
+	else
+	  return list2;
+}
+
+
 int main(void)
 {
 	struct ListNode *list1=new ListNode(4);
@@ -41,6 +68,7 @@ int main(void)
 	node5->next=node6;
 	node6->next=node7;
 	struct ListNode *p=mergeTwoSortedList(list1,list2);
+	//struct ListNode *p=mergeTwo(list1,list2);
 	while(p)
 	{
 		cout<<p->val<<",";
