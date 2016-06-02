@@ -39,6 +39,19 @@ String& String::operator=(const char* str)
 	return *this;
 }
 
+
+char& String::operator[](unsigned int index)
+{
+	return const_cast<char&>(static_cast<const String&>(*this)[index]);//这一段代码很经典，当const成员函数和非const成员函数代码基本一样的时候，我们在非const成员函数内调用const成员函数；
+}
+
+
+
+const char& String::operator[](unsigned int index) const
+{
+	return str_[index];
+}
+
 void String::display() const
 {
 	cout<<str_<<endl;

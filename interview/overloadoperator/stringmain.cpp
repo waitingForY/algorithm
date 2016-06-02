@@ -13,5 +13,13 @@ int main(void)
 	str1.display();
 	str2.display();
 	str3.display();
+	cout<<"*******************"<<endl;
+	cout<<"str1[1]="<<str1[1]<<endl;
+	str1[1]='J';
+	str1.display();
+	cout<<"*******************"<<endl;
+	const String str4("xiaomin");
+	str4.display();
+	cout<<"str4[1]="<<str4[1]<<endl;
 	return 0;
 }
