@@ -1,13 +1,14 @@
-#include <iostream>
 #include "stack.h"
-
-Stack::Stack():head_(NULL),size_(0){
+Stack::Stack():head_(0),size_(0){
 
 };
-
+bool Stack::Empty()
+{
+	return (size_==0);
+}
 Stack::~Stack()
 {
-	while(!empty())
+	while(!Empty())
 	{
 		List* temp=head_;
 		head_=head_->next_;
@@ -16,18 +17,16 @@ Stack::~Stack()
 	}
 }
 
-Stack::push(int data)
+void Stack::Push(int data)
 {
-	List* node=new List(data);
-	node->next_=head_;
+	List* node=new List(data,head_);
 	head_=node;
 	++size_;
-
 }
 
-Stack::pop(int& data)
+void Stack::Pop(int& data)
 {
-	while(!empty())
+	if(!Empty())
 	{
 		List* temp=head_;
 		data=head_->val_;
@@ -37,7 +36,4 @@ Stack::pop(int& data)
 	}
 }
 
-bool Stack::empty()
-{
-	return (size_==0);
-}
+

@@ -9,12 +9,12 @@ class Stack
 			public:
 				int val_;
 				List* next_;
-				List(int val):val_(val),next_(NULL){};
+				List(int val,List* next):val_(val),next_(next){};
 		};
 		Stack();
 		~Stack();
-		Push(int data);
-		Pop(int& data);
+		void Push(int data);
+		void Pop(int& data);
 		bool Empty();
 	private:
 		List* head_;
