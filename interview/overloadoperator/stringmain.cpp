@@ -21,5 +21,10 @@ int main(void)
 	const String str4("xiaomin");
 	str4.display();
 	cout<<"str4[1]="<<str4[1]<<endl;
+
+
+	cout<<"******************"<<endl;
+	String str5=str1+" ai "+str4;
+	str5.display();
 	return 0;
 }

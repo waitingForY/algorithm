@@ -52,6 +52,20 @@ const char& String::operator[](unsigned int index) const
 	return str_[index];
 }
 
+
+String operator+(const String& str1,const String& str2)
+{
+	int len=strlen(str1.str_)+strlen(str2.str_)+1;
+	char *newstr=new char[len];
+	memset(newstr,0,len);
+	strcpy(newstr,str1.str_);
+	strcat(newstr,str2.str_);
+	String temp(newstr);
+	delete[] newstr;
+	return temp;
+}
+
+
 void String::display() const
 {
 	cout<<str_<<endl;

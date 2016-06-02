@@ -3,8 +3,11 @@
 
 class String 
 {
+	//以友元函数的方式来重载+运算符
+	friend String operator+(const String&str1,const String& str2);
 	public:
-		explicit String(const char* str="");
+	//这里用explicit可以禁止转换构造
+		/*explicit*/ String(const char* str="");
 		~String();
 		String(const String& other);
 		String& operator=(const String& other);//赋值运算符的重载
