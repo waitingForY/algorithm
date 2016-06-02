@@ -3,7 +3,7 @@
 #include <string.h>
 using namespace std;
 
-char* String::mallocAndCopy(char* str)
+char* String::mallocAndCopy(const char* str)
 {
 	int len=strlen(str)+1;
 	char* newstr=new char[len];
@@ -12,7 +12,7 @@ char* String::mallocAndCopy(char* str)
 	return newstr;
 }
 
-String::String(char* str)
+String::String(const char* str)
 {
 	str_=mallocAndCopy(str);
 }
@@ -28,6 +28,14 @@ String& String::operator=(const String& other)
 	  return *this;
 	delete []str_;
 	str_=mallocAndCopy(other.str_);
+	return *this;
+}
+
+
+String& String::operator=(const char* str)
+{
+	delete []str_;
+	str_=mallocAndCopy(str);
 	return *this;
 }
 

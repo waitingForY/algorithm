@@ -4,14 +4,15 @@
 class String 
 {
 	public:
-		String(char* str);
+		explicit String(const char* str);
 		~String();
 		String(const String& other);
 		String& operator=(const String& other);
+		String& operator=(const char* str);
 		void display() const;
 	private:
 		char* str_;
-		char* mallocAndCopy(char* str);
+		char* mallocAndCopy(const char* str);
 };
 
 #endif //STRING_H
