@@ -26,5 +26,10 @@ int main(void)
 	cout<<"******************"<<endl;
 	String str5=str1+" ai "+str4;
 	str5.display();
+
+	cout<<"******************"<<endl;
+	String str6="wo ai ";
+	str6+="xiaomin";
+	str6.display();
 	return 0;
 }

@@ -66,6 +66,19 @@ String operator+(const String& str1,const String& str2)
 }
 
 
+String& String::operator+=(const String& other)
+{
+	int len=strlen(str_)+strlen(other.str_)+1;
+	char* newstr=new char[len];
+	memset(newstr,0,len);
+	strcpy(newstr,str_);
+	strcat(newstr,other.str_);
+	delete[] str_;
+	str_=newstr;
+	return *this;
+}
+
+
 void String::display() const
 {
 	cout<<str_<<endl;
