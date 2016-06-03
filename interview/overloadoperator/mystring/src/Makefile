@@ -26,4 +26,4 @@ $(ALL_OBJ): %.o: %.cpp
 	$(CC) $(INCLUDE) $(CFLAGS) -c $< -o $(OBJ_PATH)$@
 
 clean:
-	-rm $(OBJ_PATH)*.o $(BIN) *.o
+	-rm $(OBJ_PATH)*.o $(BIN)
