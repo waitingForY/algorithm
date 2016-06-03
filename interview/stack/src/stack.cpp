@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "../include/stack.h"
 Stack::Stack():head_(0),size_(0){
 
 };
