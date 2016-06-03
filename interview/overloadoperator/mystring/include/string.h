@@ -1,11 +1,15 @@
 #ifndef STRING_H
 #define STRING_H
 
+
+#include <iostream>
+using namespace std;
 class String 
 {
 	//以友元函数的方式来重载+运算符
-	friend String operator+(const String&str1,const String& str2);
-	
+	friend String operator+(const String&str1,const String& str2);//最好以友元的方式来重载，第一个参数可以是一个字符串
+	friend ostream& operator<<(ostream& out,const String& str);//流运算符的重载只能用友元函数的方式重载
+	friend istream& operator>>(istream& in,String& str);
 	public:
 	//这里用explicit可以禁止转换构造
 		/*explicit*/ String(const char* str="");

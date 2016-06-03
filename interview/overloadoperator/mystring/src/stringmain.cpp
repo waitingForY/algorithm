@@ -31,5 +31,9 @@ int main(void)
 	String str6="wo ai ";
 	str6+="xiaomin";
 	str6.display();
+
+	String str7;
+	cin>>str7;
+	cout<<str7<<endl;
 	return 0;
 }

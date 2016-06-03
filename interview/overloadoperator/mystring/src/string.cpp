@@ -1,7 +1,5 @@
 #include "../include/string.h"
-#include <iostream>
 #include <string.h>
-using namespace std;
 
 char* String::mallocAndCopy(const char* str)
 {
@@ -78,6 +76,19 @@ String& String::operator+=(const String& other)
 	return *this;
 }
 
+ostream& operator<<(ostream& out,const String& str)
+{
+	out<<str.str_;
+	return out;
+}
+
+istream& operator>>(istream& in,String& str)
+{
+	char temp[1024];
+	in>>temp;
+	str=temp;
+	return in;
+}
 
 void String::display() const
 {
