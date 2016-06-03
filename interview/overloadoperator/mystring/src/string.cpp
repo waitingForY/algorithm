@@ -15,6 +15,7 @@ String::String(const char* str)
 	str_=mallocAndCopy(str);
 }
 
+//这里是深拷贝
 String::String(const String& other)
 {
 	str_=mallocAndCopy(other.str_);
