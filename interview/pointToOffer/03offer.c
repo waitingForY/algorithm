@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 
 int find(int **parr,int rows,int columns,int target)
 {
@@ -25,19 +25,17 @@ int find(int **parr,int rows,int columns,int target)
 	return found;
 }
 
-int main(void)
+int main(int argc,char **argv)
 {
-	int arr[4][4]={{1,2,8,9},{2,4,9,12},{4,7,10.13},{6,8,11,15}};
-	int i,j;
-	for(i=0;i<4;i++)
+	if(argc!=2)
 	{
-		for(j=0;j<4;j++)
-		{
-			printf("%d,",arr[i][j]);
-		}
-		printf("\n");
+		printf("Usage:%s targetnum\n",argv[0]);
+		exit(EXIT_FAILURE);
 	}
-	int res=find((int **)arr,4,4,5);
-	printf("result=%d\n",res);
+	int targetnum=atoi(argv[1]);
+	int arr[4][4]={{1,2,8,9},{2,4,9,12},{4,7,10.13},{6,8,11,15}};
+	int res=find((int **)arr,4,4,targetnum);
+	char *p=(res==1?"true":"false");
+	printf("result=%s\n",p);
 	return 0;
 }
