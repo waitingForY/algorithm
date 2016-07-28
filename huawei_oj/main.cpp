@@ -52,8 +52,6 @@ void tableToList(int table[][MAX_VERTEX],Node *rootList[],int n,int currentnodev
 }
 void findPath(int root)
 {
-	if(leafs.size()==0)
-	  return;
 	result.push_back((*(rootList+root-1))->val);
 	if((*(rootList+root-1))->val==*leafs.begin())
 	  leafs.erase(leafs.begin());
