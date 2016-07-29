@@ -1,66 +1,67 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#define MAX_VERTEX 301
+#include <set>
+#include <map>
+#include <stdlib.h>
 using namespace std;
 typedef struct treeNode
 {
 	int val;
 	struct treeNode* next;
 }Node;
-Node *rootList[MAX_VERTEX];
+map<int,Node*>rootset;
+multimap<int,int>edgemap;
 vector<int>leafs;
 vector<int>result;
-void initRootList(Node *rootList[],int n)
+void constructList(int leaf)
 {
-	for(int i=0;i<n;i++)
+	for(multimap<int,int>::iterator it=edgemap.begin();it!=edgemap.end();++it)
 	{
-		Node* node=(Node*)malloc(sizeof(Node));
-		node->next=NULL;
-		node->val=i+1;
-		rootList[i]=node;
-	}
-}
-void tableToList(int table[][MAX_VERTEX],Node *rootList[],int n,int currentnodeval)
-{
-	if(currentnodeval==1)
-	  return;
-	for(int i=0;i<n;i++)
-	{
-		if(table[i][currentnodeval-1]==1)
+		if(leaf==1)
+		  break;
+		if(it->second==leaf||it->first==leaf)
 		{
-			Node* p=rootList[i];
-			Node* ptail=rootList[i];
+			int father;
+			it->second==leaf?father=it->first:father=it->second;
+			map<int,Node*>::iterator pfather=rootset.find(father);
+			Node* p=pfather->second;
+			Node* ptail=p;
 			while(p)
 			{
-				if(p->val==currentnodeval)
+				if(p->val==leaf)
 				  break;
 				ptail=p;
 				p=p->next;
 			}
 			if(p==NULL)
 			{
-				Node* node=(Node*)malloc(sizeof(Node));
+				Node *node=(Node*)malloc(sizeof(Node));
 				node->next=NULL;
-				node->val=currentnodeval;
-				ptail->next=node;
+				node->val=leaf;
+				if(pfather->second==NULL)
+				  pfather->second=node;
+				else
+				  ptail->next=node;
+
 			}
-			tableToList(table,rootList,n,i+1);
+			edgemap.erase(it);
+			constructList(father);
 			break;
 		}
 	}
 }
 void findPath(int root)
 {
-	result.push_back((*(rootList+root-1))->val);
-	if((*(rootList+root-1))->val==*leafs.begin())
+	map<int,Node*>::iterator it=rootset.find(root);
+	result.push_back(it->first);
+	if(it->first==*(leafs.begin()))
 	  leafs.erase(leafs.begin());
-	Node* p=(*(rootList+root-1))->next;
+	Node *p=it->second;
 	while(p)
 	{
 		findPath(p->val);
-		result.push_back((*(rootList+root-1))->val);
-		if((*(rootList+root-1))->val==*leafs.begin())
+		result.push_back(it->first);
+		if(it->first==*(leafs.begin()))
 		  leafs.erase(leafs.begin());
 		p=p->next;
 	}
@@ -68,38 +69,29 @@ void findPath(int root)
 int main(void)
 {
 	int n;
-	while(cin>>n)
-	{
-		int tmp[MAX_VERTEX][MAX_VERTEX];
-		for(int i=0;i<n;i++)
-		  for(int j=0;j<n;j++)
-			tmp[i][j]=0;
-		for(int i=0;i<n-1;i++)
-		{
+	while(cin>>n){
+		map<int,int>leaf_count;
+		for(int i=0;i<n-1;i++){
 			int ver1,ver2;
 			cin>>ver1>>ver2;
-			ver1<ver2?tmp[ver1-1][ver2-1]=1:tmp[ver2-1][ver1-1]=1;
+			ver1<ver2?edgemap.insert({ver1,ver2}):edgemap.insert({ver2,ver1});
+			rootset.insert({ver1,NULL});
+			rootset.insert({ver2,NULL});
+			leaf_count[ver1]++;
+			leaf_count[ver2]++;
+			
 		}
-		initRootList(rootList,n);
 		int leafcount=0;
-		for(int i=1;i<n;i++)
-		{
-			int j;
-			for(j=1;j<n;j++)
-			  if(tmp[i][j]==1)
-				break;
-			if(j==n)
-			{
-				leafcount=n-i;
-				break;
-			}
-		}
 		int leaf;
+		for(map<int,int>::iterator it=leaf_count.begin();it!=leaf_count.end();++it)
+		  if(it->first!=1&&it->second==1)
+			leafcount++;
+		cout<<"叶子："<<leafcount<<endl;
 		for(int i=0;i<leafcount;i++)
 		{
 			cin>>leaf;
 			leafs.push_back(leaf);
-			tableToList(tmp,rootList,n,leaf);
+			constructList(leaf);
 		}
 		findPath(1);
 		if(leafs.size()!=0)
@@ -107,10 +99,13 @@ int main(void)
 		else
 		{
 			for(vector<int>::iterator it=result.begin();it!=result.end();++it)
-			  cout<<*it<<"->";
+			  cout<<*it<<" ";
 			cout<<endl;
 		}
 		result.clear();
+		edgemap.clear();
+		rootset.clear();
+		leafs.clear();
 	}
 	return 0;
 }

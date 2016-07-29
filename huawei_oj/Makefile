@@ -1,6 +1,6 @@
 .PHONY:clean all
 CC=g++
-CFLAGS=-Wall -g
+CFLAGS=-g -Wall --std=c++11
 BIN=main
 
 all:$(BIN)
