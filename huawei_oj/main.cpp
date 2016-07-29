@@ -86,7 +86,6 @@ int main(void)
 		for(map<int,int>::iterator it=leaf_count.begin();it!=leaf_count.end();++it)
 		  if(it->first!=1&&it->second==1)
 			leafcount++;
-		cout<<"叶子："<<leafcount<<endl;
 		for(int i=0;i<leafcount;i++)
 		{
 			cin>>leaf;
