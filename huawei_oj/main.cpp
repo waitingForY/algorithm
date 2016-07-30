@@ -11,7 +11,7 @@ typedef struct treeNode
 }Node;
 map<int,Node*>rootset;
 multimap<int,int>edgemap;
-vector<int>leafs;
+set<int>leafs;
 vector<int>result;
 void constructList(int leaf)
 {
@@ -19,7 +19,7 @@ void constructList(int leaf)
 	{
 		if(leaf==1)
 		  break;
-		if(it->second==leaf||it->first==leaf)
+		if((it->second==leaf&&leafs.find(it->first)==leafs.end())||(it->first==leaf&&leafs.find(it->second)==leafs.end()))
 		{
 			int father;
 			it->second==leaf?father=it->first:father=it->second;
@@ -54,15 +54,16 @@ void findPath(int root)
 {
 	map<int,Node*>::iterator it=rootset.find(root);
 	result.push_back(it->first);
-	if(it->first==*(leafs.begin()))
-	  leafs.erase(leafs.begin());
+	set<int>::iterator pleaf;
+	if((pleaf=leafs.find(it->first))!=leafs.end())
+	  leafs.erase(pleaf);
 	Node *p=it->second;
 	while(p)
 	{
 		findPath(p->val);
 		result.push_back(it->first);
-		if(it->first==*(leafs.begin()))
-		  leafs.erase(leafs.begin());
+		if((pleaf=leafs.find(it->first))!=leafs.end())
+		  leafs.erase(pleaf);
 		p=p->next;
 	}
 }
@@ -89,8 +90,19 @@ int main(void)
 		for(int i=0;i<leafcount;i++)
 		{
 			cin>>leaf;
-			leafs.push_back(leaf);
+			leafs.insert(leaf);
 			constructList(leaf);
+		}
+		for(map<int,Node*>::iterator it=rootset.begin();it!=rootset.end();++it)
+		{
+			cout<<it->first<<"->";
+			Node* p=it->second;
+			while(p)
+			{
+				cout<<p->val<<"->";
+				p=p->next;
+			}
+			cout<<"NULL"<<endl;
 		}
 		findPath(1);
 		if(leafs.size()!=0)
