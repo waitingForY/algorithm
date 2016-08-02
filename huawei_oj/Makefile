@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC=g++
 CFLAGS=-g -Wall --std=c++11
-BIN=main
+BIN=main mysplitstr
 
 all:$(BIN)
 %.o:%.c
