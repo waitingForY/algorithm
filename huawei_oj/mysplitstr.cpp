@@ -9,7 +9,7 @@ vector<string> split(string &str,string &parten)
 	str+=parten;
 	vector<string>::size_type size=str.length();
 	vector<string>::size_type pos;
-	for(int i=0;i<size;i++)
+	for(string::size_type i=0;i<size;i++)
 	{
 		pos=str.find(parten,i);
 		if(pos<size)
@@ -32,9 +32,9 @@ int main(void)
 	getline(cin,parten);
 	vector<string> result;
 	result=split(inputstr,parten);
-	for(int i=0;i<result.size();i++)
+	for(vector<string>::iterator it=result.begin();it!=result.end();++it)
 	{
-		cout<<result[i]<<endl;
+		cout<<*it<<endl;
 	}
 	return 0;
 }
