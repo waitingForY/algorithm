@@ -24,12 +24,12 @@ void heapAdjust(vector<int> &arr,int elemi,int size)
 		rchild=lchild+1;
 	}
 	if(lchild<size&&arr[elemi]>arr[lchild])
-	  swap(arr[elemi],lchild);
+	  swap(arr[elemi],arr[lchild]);
 	return;
 }
 void heapSort(vector<int> &arr,int size)
 {
-	for(int i=size;i>=0;i--)
+	for(int i=size/2-1;i>=0;i--)
 		heapAdjust(arr,i,size);
 	while(size>0)
 	{
