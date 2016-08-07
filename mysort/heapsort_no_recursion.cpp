@@ -40,12 +40,20 @@ void heapSort(vector<int> &arr,int size)
 }
 int main(void)
 {
-	vector<int>arr={3,2,4,5,1,9,7,8,6};
-	heapSort(arr,arr.size());
-	for(int i=0;i<arr.size();i++)
+	int n;
+	while(cin>>n)
 	{
-		cout<<arr[i]<<" ";
+		vector<int>arr;
+		int data;
+		for(int i=0;i<n;i++)
+		{
+			cin>>data;
+			arr.push_back(data);
+		}
+		heapSort(arr,arr.size());
+		for(int i=0;i<arr.size();i++)
+			cout<<arr[i]<<" ";
+		cout<<endl;
 	}
-	cout<<endl;
 	return 0;
 }
