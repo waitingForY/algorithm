@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC=g++
 CFLAGS=-g -Wall
-BIN=huaweioj_08_02
+BIN=reverseStack
 
 all:$(BIN)
 %.o:%.c
