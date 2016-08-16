@@ -1,7 +1,7 @@
 .PHONY:clean all
 CC=g++
 CFLAGS=-g -Wall
-BIN=reverseStack
+BIN=reverseStack bignum_sum huaweioj_08_03
 
 all:$(BIN)
 %.o:%.c

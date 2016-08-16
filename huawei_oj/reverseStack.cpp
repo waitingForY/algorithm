@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stack>
-#include <algorithm>
 using namespace std;
 int getAndRemoveTail(stack<int> &tmp_stack)
 {
@@ -8,9 +7,7 @@ int getAndRemoveTail(stack<int> &tmp_stack)
 	int result=tmp_stack.top();
 	tmp_stack.pop();
 	if(tmp_stack.empty())
-	{
-		return result;
-	}
+	  return result;
 	else
 	{
 		tail=getAndRemoveTail(tmp_stack);
@@ -19,7 +16,6 @@ int getAndRemoveTail(stack<int> &tmp_stack)
 	return tail;
 
 }
-
 void reverseStack(stack<int> &tmp_stack)
 {
 	int tail=getAndRemoveTail(tmp_stack);
@@ -33,7 +29,6 @@ void reverseStack(stack<int> &tmp_stack)
 		tmp_stack.push(tail);
 	}
 }
-
 int main(void)
 {
 	int n;
