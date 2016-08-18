@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-vector<string> split(string &str,string &parten)
+vector<int> split(string &str,string &parten)
 {
-	vector<string> result;
+	vector<int> result;
 	str+=parten;
 	vector<string>::size_type size=str.length();
 	vector<string>::size_type pos;
@@ -15,7 +16,8 @@ vector<string> split(string &str,string &parten)
 		if(pos<size)
 		{
 			string tmp=str.substr(i,pos-i);
-			result.push_back(tmp);
+			int data=stoi(tmp);
+			result.push_back(data);
 			i=pos+parten.length()-1;
 		}
 	}
@@ -30,9 +32,9 @@ int main(void)
 	getline(cin,inputstr);
 	cout<<"input parten";
 	getline(cin,parten);
-	vector<string> result;
+	vector<int> result;
 	result=split(inputstr,parten);
-	for(vector<string>::iterator it=result.begin();it!=result.end();++it)
+	for(vector<int>::iterator it=result.begin();it!=result.end();++it)
 	{
 		cout<<*it<<endl;
 	}
